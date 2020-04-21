@@ -218,7 +218,7 @@ public class GUI extends Application
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			FileInputStream fi = new FileInputStream(
-					"C:\\eclipse-workspace\\jeopardy\\src\\games\\game" + gameNum.get() + ".txt");
+					"C:\\MyGithub\\Jeopardy-Game\\games\\game" + gameNum.get() + ".txt");
 			GZIPInputStream gi = new GZIPInputStream(fi);
 			ObjectInputStream oi = new ObjectInputStream(gi);
 			Game game = (Game) (oi.readObject());
