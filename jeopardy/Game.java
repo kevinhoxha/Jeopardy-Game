@@ -56,6 +56,42 @@ public class Game implements Serializable
 	{
 		return players;
 	}
+	
+	public Category getCategory(int round, int column)
+	{
+		Round r;
+		if (round == 1)
+		{
+			r = this.jeopardy;
+		}
+		else if (round == 2)
+		{
+			r = this.doubleJeopardy;
+		}
+		else
+		{
+			r = this.finalJeopardy;
+		}
+		return r.getCategory(column);
+	}
+	
+	public Question getQuestion(int round, int row, int column)
+	{
+		Round r;
+		if (round == 1)
+		{
+			r = this.jeopardy;
+		}
+		else if (round == 2)
+		{
+			r = this.doubleJeopardy;
+		}
+		else
+		{
+			r = this.finalJeopardy;
+		}
+		return r.getCategory(column).getQuestion(row);
+	}
 
 	@Override
 	public String toString()

@@ -56,6 +56,11 @@ public class Round implements Serializable
 	{
 		return categories.iterator();
 	}
+	
+	public Category getCategory(int i)
+	{
+		return this.categories.get(i);
+	}
 
 	@Override
 	public String toString()
