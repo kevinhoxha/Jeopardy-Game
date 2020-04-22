@@ -1,4 +1,4 @@
-package jeopardy;
+package kph.jeopardy.view;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -24,6 +24,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import kph.jeopardy.model.Contestant;
+import kph.jeopardy.model.Game;
 
 public class GUI extends Application
 {
@@ -365,7 +367,7 @@ public class GUI extends Application
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
-			InputStream fi = cl.getResourceAsStream("resources/game" + gameNum.get() + ".txt");
+			InputStream fi = cl.getResourceAsStream("game" + gameNum.get() + ".dat");
 			GZIPInputStream gi = new GZIPInputStream(fi);
 			ObjectInputStream oi = new ObjectInputStream(gi);
 			Game game = (Game) (oi.readObject());
@@ -381,8 +383,8 @@ public class GUI extends Application
 		} 
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
-			return new Game();
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

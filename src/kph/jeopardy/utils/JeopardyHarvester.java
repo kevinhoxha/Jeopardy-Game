@@ -1,4 +1,4 @@
-package jeopardy;
+package kph.jeopardy.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,12 +12,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import kph.jeopardy.model.Category;
+import kph.jeopardy.model.Game;
+import kph.jeopardy.model.Question;
+import kph.jeopardy.model.Round;
+
 public class JeopardyHarvester
 {
 	public static void main(String[] args)
 	{
 		ExecutorService executor = Executors.newFixedThreadPool(100);
-		for (int i = 1; i <= 5; i++)
+		for (int i = 1; i <= 10; i++)
 		{
 			executor.submit(createGame(i));
 		}
@@ -140,7 +145,7 @@ public class JeopardyHarvester
 				currentGame.setDoubleJeopardy(doubleJeopardyRound);
 				currentGame.setFinalJeopardy(finalJeopardyRound);
 				FileOutputStream f = new FileOutputStream(
-						new File("C:\\eclipse-workspace\\jeopardy\\src\\games\\game" + gameNum + ".txt"));
+						new File("C:\\MyGithub\\Jeopardy-Game\\resources\\game" + gameNum + ".dat"));
 				GZIPOutputStream g = new GZIPOutputStream(f);
 				ObjectOutputStream o = new ObjectOutputStream(g);
 				o.writeObject(currentGame);

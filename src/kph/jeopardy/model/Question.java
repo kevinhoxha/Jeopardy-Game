@@ -1,4 +1,4 @@
-package jeopardy;
+package kph.jeopardy.model;
 
 import java.io.Serializable;
 
