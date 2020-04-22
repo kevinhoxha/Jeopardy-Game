@@ -64,15 +64,15 @@ public class GUI extends Application
 					if (k == 0)
 					{
 						Button b = new Button(game.getCategory(1,  i).getName());
-						b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: 250px; -fx-alignment: CENTER; -fx-text-alignment: center");
+						b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: "+ primaryScreenBounds.getWidth()/8 + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 						b.setWrapText(true);
 						b.setEffect(new DropShadow());
 						roundPane.add(b, i, k);
-					} 
+					}  
 					else
 					{
 						Button b = new Button("$" + Integer.toString(k * 200));
-						b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: 250px");
+						b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px");
 						b.setEffect(new DropShadow());
 						final int newK = k;
 						final int newI = i;
@@ -82,19 +82,19 @@ public class GUI extends Application
 								if (!b.getText().equals("✓"))
 								{
 									b.setText("✓");
-									b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 5em; -fx-pref-width: 250px");
+									b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 5em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px");
 									GridPane questionPane = new GridPane();
 									Button categoryB = new Button(game.getCategory(1, newI).getName());
-									categoryB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+									categoryB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 									categoryB.setWrapText(true);
 									Button answerB = new Button("Click to show answer");
-									answerB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+									answerB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 									answerB.setWrapText(true);
 									answerB.setOnAction(click2 -> {
 										answerB.setText(game.getQuestion(1, newK, newI).getAnswer());
 									});
 									Button questionB = new Button(game.getQuestion(1, newK, newI).getBody());
-									questionB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: 1525px; -fx-pref-height: " + (roundPane.getHeight())+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
+									questionB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width:" + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-pref-height: " + (roundPane.getHeight() * 4/5)+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 									questionB.setWrapText(true);
 									questionPane.add(categoryB, 0, 0);
 									questionPane.add(questionB, 0, 1);
@@ -189,7 +189,7 @@ public class GUI extends Application
 							if (k == 0)
 							{
 								Button b = new Button(game.getCategory(2,  i).getName());
-								b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: 250px; -fx-alignment: CENTER; -fx-text-alignment: center");
+								b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 								b.setWrapText(true);
 								b.setEffect(new DropShadow());
 								round2Pane.add(b, i, k);
@@ -197,7 +197,7 @@ public class GUI extends Application
 							else
 							{
 								Button b = new Button("$" + Integer.toString(k * 400));
-								b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: 250px");
+								b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px");
 								b.setEffect(new DropShadow());
 								final int newK = k;
 								final int newI = i;
@@ -207,19 +207,19 @@ public class GUI extends Application
 										if (!b.getText().equals("✓"))
 										{
 											b.setText("✓");
-											b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 5em; -fx-pref-width: 250px");
+											b.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 5em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px");
 											GridPane questionPane = new GridPane();
 											Button categoryB = new Button(game.getCategory(2, newI).getName());
-											categoryB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+											categoryB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 											categoryB.setWrapText(true);
 											Button answerB = new Button("Click to show answer");
-											answerB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+											answerB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 											answerB.setWrapText(true);
 											answerB.setOnAction(click3 -> {
 												answerB.setText(game.getQuestion(2, newK, newI).getAnswer());
 											});
 											Button questionB = new Button(game.getQuestion(2, newK, newI).getBody());
-											questionB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: 1525px; -fx-pref-height: " + (roundPane.getHeight())+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
+											questionB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-pref-height: " + (roundPane.getHeight() * 4/5)+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 											questionB.setWrapText(true);
 											questionPane.add(categoryB, 0, 0);
 											questionPane.add(questionB, 0, 1);
@@ -270,13 +270,13 @@ public class GUI extends Application
 					}
 					GridPane round3Pane = new GridPane();
 					Button finalCat = new Button(game.getFinalJeopardy().getCategory(0).getName());
-					finalCat.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+					finalCat.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 					finalCat.setWrapText(true);
 					Button finalQ = new Button(game.getFinalJeopardy().getCategory(0).getQuestions().next().getBody());
-					finalQ.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: 1525px; -fx-pref-height: " + (round2Pane.getHeight())+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
+					finalQ.setStyle("-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 5em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-pref-height: " + (round2Pane.getHeight() * 4/5)+ "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 					finalQ.setWrapText(true);
 					Button finalA = new Button("Click to show answer");
-					finalA.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
+					finalA.setStyle("-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 4em; -fx-pref-width: " + (6 * primaryScreenBounds.getWidth()/8 + 25) + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 					finalA.setWrapText(true);
 					finalA.setOnAction(click2 -> {
 						finalA.setText(game.getFinalJeopardy().getCategory(0).getQuestions().next().getAnswer());
@@ -321,7 +321,7 @@ public class GUI extends Application
 			for (int i = 0; i < 6; i++)
 			{
 				Button test = (Button) getNodeByRowColumnIndex(0, i, roundPane);
-				test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: 250px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
+				test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: " + primaryScreenBounds.getWidth()/8 + "px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
 			}
 		} 
 		catch (Exception e)
