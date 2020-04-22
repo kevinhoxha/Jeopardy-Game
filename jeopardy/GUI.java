@@ -29,6 +29,7 @@ public class GUI extends Application
 {
 
 	private int increment = 0;
+	private int[] increments;
 	private	int round = 1;
 	
 	public static void main(String[] args)
@@ -121,16 +122,34 @@ public class GUI extends Application
 				Button upB = new Button("+");
 				upB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-alignment: CENTER; -fx-text-alignment: center; -fx-pref-width: 25px");
 				upB.setOnAction(click -> {
-					p.changeScore(increment);
-					Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
-					newText.setText(p.getName() + ": $" + p.getScore());
+					if (round == 3)
+					{
+						p.changeScore(increments[game.getPlayers().indexOf(p)]);
+						Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
+						newText.setText(p.getName() + ": $" + p.getScore());	
+					}
+					else
+					{
+						p.changeScore(increment);
+						Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
+						newText.setText(p.getName() + ": $" + p.getScore());	
+					}
 				});
 				Button downB = new Button("-");
 				downB.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-alignment: CENTER; -fx-text-alignment: center; -fx-pref-width: 25px");
 				downB.setOnAction(click -> {
-					p.changeScore(-1 * increment);
-					Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
-					newText.setText(p.getName() + ": $" + p.getScore());
+					if (round == 3)
+					{
+						p.changeScore(-1 * increments[game.getPlayers().indexOf(p)]);
+						Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
+						newText.setText(p.getName() + ": $" + p.getScore());
+					}
+					else
+					{
+						p.changeScore(-1 * increment);
+						Text newText = (Text)getNodeByRowColumnIndex(newCount, 0, rightPane);
+						newText.setText(p.getName() + ": $" + p.getScore());	
+					}
 				});
 				players.setFont(new Font(40));
 				players.setFill(Color.WHITE);
@@ -220,10 +239,47 @@ public class GUI extends Application
 					}
 					round2Pane.setHgap(5);
 					round2Pane.setVgap(5);
-					gamePane.setCenter(round2Pane);										
+					gamePane.setCenter(round2Pane);	
+					double maxHeight2 = 0;
+					for(int i = 0; i < 6; i++)
+					{
+						Button test = (Button) getNodeByRowColumnIndex(0, i, round2Pane);
+						if (test.getHeight() > maxHeight2)
+						{
+							maxHeight2 = test.getHeight();
+						}
+					}
+					for (int i = 0; i < 6; i++)
+					{
+						Button test = (Button) getNodeByRowColumnIndex(0, i, round2Pane);
+						test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: 250px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight2 + "px; -fx-text-alignment: center");
+					}
 				}
 				else if (round == 3)
 				{
+					for (int i = 0; i < increments.length; i++)
+					{
+						try
+						{
+							if (game.getPlayers().get(i).getScore() > 0)
+							{
+								TextInputDialog dialog = new TextInputDialog();
+								dialog.setTitle("Jeopardy!");
+								dialog.setHeaderText("Final Jeopardy Category: " + game.getFinalJeopardy().getCategory(0).getName());
+								dialog.setContentText("Please enter " + game.getPlayers().get(i).getName() + "'s wager (must be less than $" + game.getPlayers().get(i).getScore() + "):");
+								Optional<String> result = dialog.showAndWait();
+								increments[i] = Integer.parseInt(result.get());
+							}
+							else
+							{
+								increments[i] = 0;
+							}
+						}
+						catch (Exception e)
+						{
+							System.out.println(e.getMessage());
+						}
+					}
 					GridPane round3Pane = new GridPane();
 					Button finalCat = new Button(game.getFinalJeopardy().getCategory(0).getName());
 					finalCat.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 4em; -fx-pref-width: 1525px; -fx-alignment: CENTER; -fx-text-alignment: center");
@@ -324,8 +380,6 @@ public class GUI extends Application
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			InputStream fi = cl.getResourceAsStream("resources/game" + gameNum.get() + ".txt");
-			//FileInputStream fi = new FileInputStream(
-			//		"C:\\MyGithub\\Jeopardy-Game\\games\\game" + gameNum.get() + ".txt");
 			GZIPInputStream gi = new GZIPInputStream(fi);
 			ObjectInputStream oi = new ObjectInputStream(gi);
 			Game game = (Game) (oi.readObject());
@@ -336,6 +390,7 @@ public class GUI extends Application
 			{
 				game.addPlayer(player);
 			}
+			increments = new int[playersList.size()];
 			return game;
 		} 
 		catch (Exception e)
