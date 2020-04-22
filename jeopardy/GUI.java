@@ -240,20 +240,6 @@ public class GUI extends Application
 					round2Pane.setHgap(5);
 					round2Pane.setVgap(5);
 					gamePane.setCenter(round2Pane);	
-					double maxHeight2 = 0;
-					for(int i = 0; i < 6; i++)
-					{
-						Button test = (Button) getNodeByRowColumnIndex(0, i, round2Pane);
-						if (test.getHeight() > maxHeight2)
-						{
-							maxHeight2 = test.getHeight();
-						}
-					}
-					for (int i = 0; i < 6; i++)
-					{
-						Button test = (Button) getNodeByRowColumnIndex(0, i, round2Pane);
-						test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: 250px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight2 + "px; -fx-text-alignment: center");
-					}
 				}
 				else if (round == 3)
 				{
