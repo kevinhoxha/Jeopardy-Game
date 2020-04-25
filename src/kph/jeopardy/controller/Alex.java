@@ -13,6 +13,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,6 +25,7 @@ import javafx.stage.Stage;
 import kph.jeopardy.model.Contestant;
 import kph.jeopardy.model.Game;
 import kph.jeopardy.view.BoardPane;
+import kph.jeopardy.view.FinalJeopardyPane;
 import kph.jeopardy.view.QuestionPane;
 import kph.jeopardy.view.ScoresPane;
 
@@ -83,7 +85,7 @@ public class Alex extends Application {
 			}
 			if (round == 3) {
 				((Button) scoresPane.lookup("#nextround")).setText("Finish game");
-				GridPane qPane = new QuestionPane().init(game, round, 0, 0);
+				GridPane qPane = new FinalJeopardyPane().init(game);
 				gamePane.setCenter(qPane);
 			} else if (round > 3) {
 				primaryStage.hide();
@@ -92,7 +94,10 @@ public class Alex extends Application {
 
 		//ACTION
 		((Button)scoresPane.lookup("#goback")).setOnAction(click -> {
-			gamePane.setCenter(boardPane);
+			if (round != 3)
+			{
+				gamePane.setCenter(boardPane);
+			}
 		});
 		
 		//ACTION
@@ -105,6 +110,17 @@ public class Alex extends Application {
 					contestant.changeScore(val);
 					scoresPane.updateScores();
 				}
+				else if (gamePane.getCenter().getClass().equals(FinalJeopardyPane.class)) 
+				{
+					FinalJeopardyPane fPane = (FinalJeopardyPane) gamePane.getCenter();
+					int val = 0;
+					if ((TextField)fPane.lookup(contestant.getName() + "-wager") != null)
+					{
+						val = Integer.parseInt(((TextField)fPane.lookup(contestant.getName() + "-wager")).getText());
+					}
+					contestant.changeScore(val);
+					scoresPane.updateScores();
+				}
 			});
 
 			Button down = (Button)scoresPane.lookup("#" + contestant.getName() + "-down");
@@ -112,6 +128,17 @@ public class Alex extends Application {
 				if (gamePane.getCenter().getClass().equals(QuestionPane.class)) {
 					QuestionPane qPane = (QuestionPane) gamePane.getCenter();
 					int val = - Integer.parseInt(((Button)qPane.lookup("#value")).getText().replace("$", ""));
+					contestant.changeScore(val);
+					scoresPane.updateScores();
+				}
+				else if (gamePane.getCenter().getClass().equals(FinalJeopardyPane.class)) 
+				{
+					FinalJeopardyPane fPane = (FinalJeopardyPane) gamePane.getCenter();
+					int val = 0;
+					if ((TextField)fPane.lookup(contestant.getName() + "-wager") != null)
+					{
+						val = - Integer.parseInt(((TextField)fPane.lookup(contestant.getName() + "-wager")).getText());
+					}
 					contestant.changeScore(val);
 					scoresPane.updateScores();
 				}
@@ -128,7 +155,7 @@ public class Alex extends Application {
 			gameNumDialog.setTitle("Jeopardy!");
 			gameNumDialog.setHeaderText("Select Game");
 			gameNumDialog.setContentText(
-					"Please enter a game number between 1 and 6605, with 1 being the oldest and 6605 being most recent:");
+					"Please enter a game number between 1 and 6614, with 1 being the oldest and 6614 being most recent:");
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
