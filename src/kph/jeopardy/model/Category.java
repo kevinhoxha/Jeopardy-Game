@@ -36,11 +36,11 @@ public class Category implements Serializable
 	{
 		return questions.iterator();
 	}
-	
+
 	public Question getQuestion(int i)
 	{
 		int count = 0;
-		for (Question q: questions)
+		for (Question q : questions)
 		{
 			count++;
 			if (count == i)
@@ -59,7 +59,7 @@ public class Category implements Serializable
 		for (Question question : questions)
 		{
 			builder.append("\t").append(question).append("\n");
-		} 
+		}
 		builder.append("]");
 		return builder.toString();
 	}

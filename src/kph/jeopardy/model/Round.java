@@ -10,7 +10,7 @@ public class Round implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int round;
 	private List<Category> categories;
-	
+
 	public Round(int r)
 	{
 		if (r < 1 || r > 3)
@@ -20,12 +20,12 @@ public class Round implements Serializable
 		this.round = r;
 		this.categories = new ArrayList<>();
 	}
-	
+
 	public void addCategory(Category c)
 	{
 		this.categories.add(c);
 	}
-	
+
 	public void removeCategory(Category c)
 	{
 		this.categories.remove(c);
@@ -35,18 +35,16 @@ public class Round implements Serializable
 	{
 		return round;
 	}
-	
+
 	public String getRoundName()
 	{
 		if (round == 1)
 		{
 			return "Jeopardy Round";
-		}
-		else if (round == 2)
+		} else if (round == 2)
 		{
 			return "Double Jeopardy Round";
-		}
-		else
+		} else
 		{
 			return "Final Jeopardy Round";
 		}
@@ -56,7 +54,7 @@ public class Round implements Serializable
 	{
 		return categories.iterator();
 	}
-	
+
 	public Category getCategory(int i)
 	{
 		return this.categories.get(i);

@@ -7,7 +7,7 @@ public class Contestant implements Serializable
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private int score;
-	
+
 	public Contestant(String n, int s)
 	{
 		this.name = n;
@@ -23,7 +23,7 @@ public class Contestant implements Serializable
 	{
 		return score;
 	}
-	
+
 	public void changeScore(int increment)
 	{
 		this.score += increment;

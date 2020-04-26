@@ -94,6 +94,5 @@ public class Question implements Comparable<Question>, Serializable
 	{
 		return this.value - o.value;
 	}
-	
-	
+
 }

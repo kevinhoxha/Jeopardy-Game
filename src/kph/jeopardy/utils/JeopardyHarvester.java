@@ -22,7 +22,7 @@ public class JeopardyHarvester
 	public static void main(String[] args)
 	{
 		ExecutorService executor = Executors.newFixedThreadPool(100);
-		for (int i = 6000; i <= 6614; i++)
+		for (int i = 1; i <= 6614; i++)
 		{
 			executor.submit(createGame(i));
 		}
