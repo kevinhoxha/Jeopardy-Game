@@ -13,6 +13,7 @@ public class BoardPane extends GridPane
 	public BoardPane init(Game game, int round)
 	{
 		double columnWidth = Screen.getPrimary().getVisualBounds().getWidth() / 8;
+		double columnHeight = Screen.getPrimary().getVisualBounds().getHeight() / 10;
 
 		for (int column = 0; column < 6; column++)
 		{
@@ -33,18 +34,21 @@ public class BoardPane extends GridPane
 					Button b = new Button("$" + game.getQuestion(round, row, column).getValue());
 					b.setStyle(
 							"-fx-background-color: #0000FF; -fx-text-fill: gold; -fx-font-size: 3em; -fx-pref-width: "
-									+ columnWidth + "px");
+									+ columnWidth + "px; -fx-pref-height: " + columnHeight + "px");
 					b.setEffect(new DropShadow());
 					// b.setId("r" + round + "q" + row + "" + column);
 					final int r = row, c = column;
 					b.setOnAction(click ->
 					{
-						b.setText("✓");
-						b.setStyle(
-								"-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 3em; -fx-pref-width: "
-										+ columnWidth + "px");
-						GridPane questionPane = new QuestionPane().init(game, round, r, c);
-						((BorderPane) this.getParent()).setCenter(questionPane);
+						if (!b.getText().equals("✓"))
+						{
+							b.setText("✓");
+							b.setStyle(
+									"-fx-background-color: #0000FF; -fx-text-fill: #66ff00; -fx-font-size: 3em; -fx-pref-width: "
+											+ columnWidth + "px; -fx-pref-height: " + columnHeight + "px");
+							GridPane questionPane = new QuestionPane().init(game, round, r, c);
+							((BorderPane) this.getParent()).setCenter(questionPane);
+						}
 					});
 
 					this.add(b, column, row);

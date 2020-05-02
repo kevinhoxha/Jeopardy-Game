@@ -81,22 +81,7 @@ public class Alex extends Application
 		scene.setFill(Color.DARKBLUE);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		double maxHeight = 0;
-		for (int i = 0; i < 6; i++)
-		{
-			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
-			if (test.getHeight() > maxHeight)
-			{
-				maxHeight = test.getHeight();
-			}
-		}
-		for (int i = 0; i < 6; i++)
-		{
-			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
-			test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: "
-					+ Screen.getPrimary().getVisualBounds().getWidth() / 8
-					+ "px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
-		}
+		resizeCategories();
 
 		// ACTION
 		((Button) scoresPane.lookup("#nextround")).setOnAction(click ->
@@ -106,6 +91,7 @@ public class Alex extends Application
 			{
 				boardPane = new BoardPane().init(game, round);
 				gamePane.setCenter(boardPane);
+				//resizeCategories();
 			}
 			if (round == 3)
 			{
@@ -190,6 +176,28 @@ public class Alex extends Application
 				}
 			});
 		}
+	}
+
+	private void resizeCategories()
+	{
+		double maxHeight = 0;
+		for (int i = 0; i < 6; i++)
+		{
+			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
+			if (test.getHeight() > maxHeight)
+			{
+				maxHeight = test.getHeight();
+			}
+		}
+		for (int i = 0; i < 6; i++)
+		{
+			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
+			test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: "
+					+ Screen.getPrimary().getVisualBounds().getWidth() / 8
+					+ "px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
+			test.setWrapText(true);
+		}
+		System.out.println(maxHeight);
 	}
 
 	public Game createGame(List<Contestant> playersList)
