@@ -122,9 +122,18 @@ public class Alex extends Application
 				if (gamePane.getCenter().getClass().equals(QuestionPane.class))
 				{
 					QuestionPane qPane = (QuestionPane) gamePane.getCenter();
-					int val = Integer.parseInt(((Button) qPane.lookup("#value")).getText().replace("$", ""));
-					contestant.changeScore(val);
-					scoresPane.updateScores();
+					if (qPane.checkDailyDouble())
+					{
+						int val = Integer.parseInt(((TextField) qPane.lookup("#value")).getText());
+						contestant.changeScore(val);
+						scoresPane.updateScores();
+					}
+					else
+					{
+						int val = Integer.parseInt(((Button) qPane.lookup("#value")).getText().replace("$", ""));
+						contestant.changeScore(val);
+						scoresPane.updateScores();	
+					}
 				} else if (gamePane.getCenter().getClass().equals(FinalJeopardyPane.class))
 				{
 					FinalJeopardyPane fPane = (FinalJeopardyPane) gamePane.getCenter();
@@ -152,9 +161,18 @@ public class Alex extends Application
 				if (gamePane.getCenter().getClass().equals(QuestionPane.class))
 				{
 					QuestionPane qPane = (QuestionPane) gamePane.getCenter();
-					int val = -Integer.parseInt(((Button) qPane.lookup("#value")).getText().replace("$", ""));
-					contestant.changeScore(val);
-					scoresPane.updateScores();
+					if (qPane.checkDailyDouble())
+					{
+						int val = -Integer.parseInt(((TextField) qPane.lookup("#value")).getText());
+						contestant.changeScore(val);
+						scoresPane.updateScores();
+					}
+					else
+					{
+						int val = -Integer.parseInt(((Button) qPane.lookup("#value")).getText().replace("$", ""));
+						contestant.changeScore(val);
+						scoresPane.updateScores();	
+					}
 				} else if (gamePane.getCenter().getClass().equals(FinalJeopardyPane.class))
 				{
 					FinalJeopardyPane fPane = (FinalJeopardyPane) gamePane.getCenter();
@@ -197,7 +215,6 @@ public class Alex extends Application
 					+ "px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
 			test.setWrapText(true);
 		}
-		System.out.println(maxHeight);
 	}
 
 	public Game createGame(List<Contestant> playersList)
