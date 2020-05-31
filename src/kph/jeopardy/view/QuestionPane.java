@@ -35,11 +35,12 @@ public class QuestionPane extends GridPane
 		{
 			isDailyDouble = true;
 			Button question = new Button("Show Daily Double");
-			question.setStyle(QUESTION_STYLE);
+			question.setStyle("-fx-background-color: #0000FF; -fx-text-fill: red; -fx-font-size: 5em; -fx-alignment: CENTER; -fx-text-alignment: center");
 			question.setWrapText(true);
 			question.setOnAction(click ->
 			{
 				question.setText(game.getQuestion(round, row, column).getBody());
+				question.setStyle(QUESTION_STYLE);
 			});
 			
 			Text t = new Text("Enter wager:");

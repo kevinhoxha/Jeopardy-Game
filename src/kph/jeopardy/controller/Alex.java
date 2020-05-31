@@ -39,14 +39,6 @@ public class Alex extends Application
 	private static ScoresPane scoresPane;
 	private static final BorderPane gamePane = new BorderPane();
 
-	static
-	{
-		players.add(new Contestant("Kevin", 0));
-		players.add(new Contestant("Kaitlyn", 0));
-		players.add(new Contestant("Mom", 0));
-		players.add(new Contestant("Dad", 0));
-	}
-
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -70,7 +62,7 @@ public class Alex extends Application
 		scoresPane = new ScoresPane().init(game);
 		gamePane.setRight(scoresPane);
 
-		Text title = new Text("Jeopardy!");
+		Text title = new Text("Jeopardy! " + game.getGameDate());
 		title.setFont(new Font(primaryScreenBounds.getMaxY() / 20));
 		title.setFill(Color.WHITE);
 		gamePane.setTop(title);
@@ -226,7 +218,7 @@ public class Alex extends Application
 			gameNumDialog.setTitle("Jeopardy!");
 			gameNumDialog.setHeaderText("Select Game");
 			gameNumDialog.setContentText(
-					"Please enter a game number between 1 and 6614, with 1 being the oldest and 6614 being most recent:");
+					"Please enter a game number between 1 and 6672, with 1 being the oldest and 6672 being most recent:");
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -237,6 +229,20 @@ public class Alex extends Application
 			oi.close();
 			gi.close();
 			fi.close();
+			TextInputDialog pCount = new TextInputDialog();
+			pCount.setTitle("Jeopardy!");
+			pCount.setHeaderText("Player Count");
+			pCount.setContentText("Please enter the number of players:");
+			Optional<String> playerCount = pCount.showAndWait();
+			for (int i = 1; i <= Integer.parseInt(playerCount.get()); i++)
+			{
+				TextInputDialog playerName = new TextInputDialog();
+				playerName.setTitle("Jeopardy!");
+				playerName.setHeaderText("Player " + i + "'s Name");
+				playerName.setContentText("Enter Player " + i + "'s name:");
+				Optional<String> name = playerName.showAndWait();
+				players.add(new Contestant(name.get(), 0));
+			}
 			for (Contestant player : playersList)
 			{
 				game.addPlayer(player);

@@ -22,7 +22,7 @@ public class JeopardyHarvester
 	public static void main(String[] args)
 	{
 		ExecutorService executor = Executors.newFixedThreadPool(100);
-		for (int i = 1; i <= 6614; i++)
+		for (int i = 1; i <= 6672; i++)
 		{
 			executor.submit(createGame(i));
 		}
@@ -40,6 +40,7 @@ public class JeopardyHarvester
 				Game currentGame = new Game();
 				final Document docQ = Jsoup.connect(qUrl).get();
 				final Document docA = Jsoup.connect(aUrl).get();
+				currentGame.setGameDate(docQ.select("#game_title").text());
 				Round jeopardyRound = new Round(1);
 				Round doubleJeopardyRound = new Round(2);
 				Round finalJeopardyRound = new Round(3);

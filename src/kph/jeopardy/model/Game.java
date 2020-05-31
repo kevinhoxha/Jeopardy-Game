@@ -11,6 +11,7 @@ public class Game implements Serializable
 	private Round doubleJeopardy;
 	private Round finalJeopardy;
 	private List<Contestant> players = new ArrayList<>();
+	private String gameDate;
 
 	public Round getJeopardy()
 	{
@@ -56,6 +57,16 @@ public class Game implements Serializable
 	{
 		return players;
 	}
+	
+	public void setGameDate(String g)
+	{
+		this.gameDate = g;
+	}
+	
+	public String getGameDate()
+	{
+		return this.gameDate;
+	}
 
 	public Category getCategory(int round, int column)
 	{
@@ -94,7 +105,7 @@ public class Game implements Serializable
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Game [jeopardy=").append(jeopardy).append(", doubleJeopardy=").append(doubleJeopardy)
-				.append(", finalJeopardy=").append(finalJeopardy).append(", players=").append(players).append("]");
+				.append(", finalJeopardy=").append(finalJeopardy).append(", players=").append(players).append(", gameDate=").append(gameDate).append("]");
 		return builder.toString();
 	}
 }
