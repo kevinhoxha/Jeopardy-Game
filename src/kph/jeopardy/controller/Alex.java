@@ -83,7 +83,7 @@ public class Alex extends Application
 			{
 				boardPane = new BoardPane().init(game, round);
 				gamePane.setCenter(boardPane);
-				//resizeCategories();
+				resizeCategories();
 			}
 			if (round == 3)
 			{
@@ -190,21 +190,12 @@ public class Alex extends Application
 
 	private void resizeCategories()
 	{
-		double maxHeight = 0;
-		for (int i = 0; i < 6; i++)
-		{
-			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
-			if (test.getHeight() > maxHeight)
-			{
-				maxHeight = test.getHeight();
-			}
-		}
 		for (int i = 0; i < 6; i++)
 		{
 			Button test = (Button) getNodeByRowColumnIndex(0, i, boardPane);
 			test.setStyle("-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: "
 					+ Screen.getPrimary().getVisualBounds().getWidth() / 8
-					+ "px; -fx-alignment: CENTER; -fx-pref-height: " + maxHeight + "px; -fx-text-alignment: center");
+					+ "px; -fx-alignment: CENTER; -fx-max-height: 1234567px; -fx-text-alignment: center");
 			test.setWrapText(true);
 		}
 	}
