@@ -209,7 +209,7 @@ public class Alex extends Application
 			gameNumDialog.setTitle("Jeopardy!");
 			gameNumDialog.setHeaderText("Select Game");
 			gameNumDialog.setContentText(
-					"Please enter a game number between 1 and 6672, with 1 being the oldest and 6672 being most recent:");
+					"Please enter a game number between 1 and 6699, with 1 being the oldest and 6699 being most recent:");
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -225,14 +225,24 @@ public class Alex extends Application
 			pCount.setHeaderText("Player Count");
 			pCount.setContentText("Please enter the number of players:");
 			Optional<String> playerCount = pCount.showAndWait();
-			for (int i = 1; i <= Integer.parseInt(playerCount.get()); i++)
+			if (playerCount.get().equals("*"))
 			{
-				TextInputDialog playerName = new TextInputDialog();
-				playerName.setTitle("Jeopardy!");
-				playerName.setHeaderText("Player " + i + "'s Name");
-				playerName.setContentText("Enter Player " + i + "'s name:");
-				Optional<String> name = playerName.showAndWait();
-				players.add(new Contestant(name.get(), 0));
+				players.add(new Contestant("Kevin", 0));
+				players.add(new Contestant("Kaitlyn", 0));
+				players.add(new Contestant("Mom", 0));
+				players.add(new Contestant("Dad", 0));
+			}
+			else
+			{
+				for (int i = 1; i <= Integer.parseInt(playerCount.get()); i++)
+				{
+					TextInputDialog playerName = new TextInputDialog();
+					playerName.setTitle("Jeopardy!");
+					playerName.setHeaderText("Player " + i + "'s Name");
+					playerName.setContentText("Enter Player " + i + "'s name:");
+					Optional<String> name = playerName.showAndWait();
+					players.add(new Contestant(name.get(), 0));
+				}
 			}
 			for (Contestant player : playersList)
 			{
