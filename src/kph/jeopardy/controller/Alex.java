@@ -209,7 +209,7 @@ public class Alex extends Application
 			gameNumDialog.setTitle("Jeopardy!");
 			gameNumDialog.setHeaderText("Select Game");
 			gameNumDialog.setContentText(
-					"Please enter a game number between 1 and 6699, with 1 being the oldest and 6699 being most recent:");
+					"Please enter a game number between 1 and 6722, with 1 being the oldest and 6722 being most recent:");
 			Optional<String> gameNum = gameNumDialog.showAndWait();
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
