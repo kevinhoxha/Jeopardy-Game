@@ -6,6 +6,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import kph.jeopardy.model.Game;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class BoardPane extends GridPane
 {
@@ -48,6 +50,19 @@ public class BoardPane extends GridPane
 											+ columnWidth + "px; -fx-pref-height: " + columnHeight + "px");
 							GridPane questionPane = new QuestionPane().init(game, round, r, c);
 							((BorderPane) this.getParent()).setCenter(questionPane);
+							try
+							{
+								if (game.getQuestion(round, r, c).isDailyDouble())
+								{
+									ClassLoader cl = Thread.currentThread().getContextClassLoader();
+									AudioStream audioStream = new AudioStream(cl.getResourceAsStream("dailydouble.snd"));
+									AudioPlayer.player.start(audioStream);
+								}
+							}
+							catch (Exception e)
+							{
+								System.out.println(e);
+							}
 						}
 					});
 

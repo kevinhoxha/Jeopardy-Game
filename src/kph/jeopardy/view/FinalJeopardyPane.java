@@ -8,6 +8,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import kph.jeopardy.model.Game;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class FinalJeopardyPane extends GridPane
 {
@@ -53,6 +55,16 @@ public class FinalJeopardyPane extends GridPane
 		question.setOnAction(click ->
 		{
 			question.setText(game.getQuestion(3, 1, 0).getBody());
+			try
+			{
+				ClassLoader cl = Thread.currentThread().getContextClassLoader();
+				AudioStream audioStream = new AudioStream(cl.getResourceAsStream("finaljeopardy.snd"));
+				AudioPlayer.player.start(audioStream);
+			}
+			catch (Exception e)
+			{
+				System.out.println(e);
+			}
 		});
 
 		this.add(category, 0, 0);
