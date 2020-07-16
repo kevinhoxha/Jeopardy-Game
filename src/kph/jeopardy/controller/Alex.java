@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import kph.jeopardy.model.Contestant;
 import kph.jeopardy.model.Game;
 import kph.jeopardy.view.BoardPane;
+import kph.jeopardy.view.Calendar;
 import kph.jeopardy.view.FinalJeopardyPane;
 import kph.jeopardy.view.QuestionPane;
 import kph.jeopardy.view.ScoresPane;
@@ -47,6 +48,9 @@ public class Alex extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+		// get game number
+		Calendar c = new Calendar();
+		c.start(primaryStage);
 		Game game = createGame(players); // create game
 		// create main screen
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -204,7 +208,6 @@ public class Alex extends Application
 	{
 		try
 		{
-			// get game number
 			TextInputDialog gameNumDialog = new TextInputDialog();
 			gameNumDialog.setTitle("Jeopardy!");
 			gameNumDialog.setHeaderText("Select Game");
