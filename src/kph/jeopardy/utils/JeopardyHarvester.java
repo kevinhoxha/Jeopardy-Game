@@ -2,7 +2,10 @@ package kph.jeopardy.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,10 +22,14 @@ import kph.jeopardy.model.Round;
 
 public class JeopardyHarvester
 {
+	private static List<String> dates = new ArrayList<>();
+	private static int numGames = 6735;
+	private static int numDone = 0;
+	
 	public static void main(String[] args)
 	{
 		ExecutorService executor = Executors.newFixedThreadPool(100);
-		for (int i = 1; i <= 6735; i++)
+		for (int i = 1; i <= numGames; i++)
 		{
 			executor.submit(createGame(i));
 		}
@@ -153,14 +160,33 @@ public class JeopardyHarvester
 				o.close();
 				g.close();
 				f.close();
+				dates.add(currentGame.getDay()[2] + "-" + currentGame.getDay()[0] + "-" + currentGame.getDay()[1] + " " + gameNum);
+				numDone++;
 				if (gameNum % 100 == 0)
 				{
 					System.out.println(gameNum);
+				}
+				if (numDone >= numGames)
+				{
+					try
+					{
+						FileWriter fw = new FileWriter("C:\\MyGithub\\Jeopardy-Game\\resources\\game_dates.dat");
+						for (String date: dates)
+						{
+							fw.write(date + "\n");
+						}
+						fw.close();
+					}
+					catch (Exception ex)
+					{
+						System.out.println(ex);
+					}
 				}
 				return true;
 			} catch (Exception e)
 			{
 				System.out.println(gameNum + ": " + e.getMessage());
+				numDone++;
 				return false;
 			}
 		};

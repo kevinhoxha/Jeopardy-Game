@@ -71,57 +71,58 @@ public class Game implements Serializable
 	public int[] getDay()
 	{
 		int[] day = new int[3];
-		String[] date = gameDate.replaceAll(",", "").split("-");
-		if (date[1].equals("January"))
+		String[] date1 = gameDate.replaceAll(",", "").split("-");
+		String[] date = date1[1].split(" ");
+		if (date[2].equals("January"))
 		{
 			day[0] = 1;
 		}
-		else if (date[1].equals("February"))
+		else if (date[2].equals("February"))
 		{
 			day[0] = 2;
 		}
-		else if (date[1].equals("March"))
+		else if (date[2].equals("March"))
 		{
 			day[0] = 3;
 		}
-		else if (date[1].equals("April"))
+		else if (date[2].equals("April"))
 		{
 			day[0] = 4;
 		}
-		else if (date[1].equals("May"))
+		else if (date[2].equals("May"))
 		{
 			day[0] = 5;
 		}
-		else if (date[1].equals("June"))
+		else if (date[2].equals("June"))
 		{
 			day[0] = 6;
 		}
-		else if (date[1].equals("July"))
+		else if (date[2].equals("July"))
 		{
 			day[0] = 7;
 		}
-		else if (date[1].equals("August"))
+		else if (date[2].equals("August"))
 		{
 			day[0] = 8;
 		}
-		else if (date[1].equals("September"))
+		else if (date[2].equals("September"))
 		{
 			day[0] = 9;
 		}
-		else if (date[1].equals("October"))
+		else if (date[2].equals("October"))
 		{
 			day[0] = 10;
 		}
-		else if (date[1].equals("November"))
+		else if (date[2].equals("November"))
 		{
 			day[0] = 11;
 		}
-		else if (date[1].equals("December"))
+		else if (date[2].equals("December"))
 		{
 			day[0] = 12;
 		}
-		day[1] = Integer.parseInt(date[2]);
-		day[2] = Integer.parseInt(date[3]);
+		day[1] = Integer.parseInt(date[3]);
+		day[2] = Integer.parseInt(date[4]);
 		return day;
 	}
 

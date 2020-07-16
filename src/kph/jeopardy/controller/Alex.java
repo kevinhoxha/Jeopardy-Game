@@ -1,20 +1,30 @@
 package kph.jeopardy.controller;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.zip.GZIPInputStream;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
@@ -24,10 +34,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import kph.jeopardy.model.Contestant;
 import kph.jeopardy.model.Game;
 import kph.jeopardy.view.BoardPane;
-import kph.jeopardy.view.Calendar;
 import kph.jeopardy.view.FinalJeopardyPane;
 import kph.jeopardy.view.QuestionPane;
 import kph.jeopardy.view.ScoresPane;
@@ -39,6 +49,7 @@ public class Alex extends Application
 	private static BoardPane boardPane;
 	private static ScoresPane scoresPane;
 	private static final BorderPane gamePane = new BorderPane();
+	private Map<LocalDate, Integer> gameDays = new HashMap<>();
 
 	public static void main(String[] args)
 	{
@@ -49,8 +60,6 @@ public class Alex extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		// get game number
-		Calendar c = new Calendar();
-		c.start(primaryStage);
 		Game game = createGame(players); // create game
 		// create main screen
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -208,15 +217,62 @@ public class Alex extends Application
 	{
 		try
 		{
-			TextInputDialog gameNumDialog = new TextInputDialog();
-			gameNumDialog.setTitle("Jeopardy!");
-			gameNumDialog.setHeaderText("Select Game");
-			gameNumDialog.setContentText(
-					"Please enter a game number between 1 and 6735, with 1 being the oldest and 6735 being most recent:");
-			Optional<String> gameNum = gameNumDialog.showAndWait();
+			Dialog<String> dialog = new Dialog<>();
+			dialog.setTitle("Jeopardy!");
+			dialog.setHeaderText("Select game");
+			dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+			try
+			{
+				Scanner gameReader = new Scanner(new File("C:\\MyGithub\\Jeopardy-Game\\resources\\game_dates.dat"));
+				while (gameReader.hasNextLine())
+				{
+					String[] str = gameReader.nextLine().split(" ");
+					String[] l = str[0].split("-");
+					gameDays.put(LocalDate.of(Integer.parseInt(l[0]), Integer.parseInt(l[1]), Integer.parseInt(l[2])), Integer.parseInt(str[1]));
+				}
+				gameReader.close();
+			}
+			catch (Exception w)
+			{
+				System.out.println(w.getMessage());
+			}
+			GridPane grid = new GridPane();
+			grid.setHgap(10);
+			grid.setVgap(10);
+			grid.setPadding(new Insets(20, 150, 10, 10));
+			DatePicker d = new DatePicker();
+			d.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+				@Override
+				public DateCell call(DatePicker param) {
+					return new DateCell(){
+						@Override
+						public void updateItem(LocalDate item, boolean empty) {
+							super.updateItem(item, empty);
+
+							if (!empty && item != null) {
+								if(gameDays.keySet().contains(item)) {
+									this.setStyle("-fx-background-color: lightblue");
+								}
+							}
+						}
+					};
+				}
+			});
+			grid.add(new Text("Please pick a date in the calendar below corresponding to the air date of the Jeopardy! game you would like to play. The days highlighted in blue have a corresponding game."), 0, 0);
+			grid.add(d, 0, 1);
+			dialog.getDialogPane().setContent(grid);
+			dialog.setResultConverter(dialogButton -> {
+			    if (dialogButton == ButtonType.OK) {
+			        return d.getValue().toString();
+			    }
+			    return null;
+			});
+			Optional<String> gameDate = dialog.showAndWait();
+			int gameNum = gameDays.get(LocalDate.of(Integer.parseInt(gameDate.get().split("-")[0]), Integer.parseInt(gameDate.get().split("-")[1]), Integer.parseInt(gameDate.get().split("-")[2])));
+			
 			// create game object
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
-			InputStream fi = cl.getResourceAsStream("game" + gameNum.get() + ".dat");
+			InputStream fi = cl.getResourceAsStream("game" + gameNum + ".dat");
 			GZIPInputStream gi = new GZIPInputStream(fi);
 			ObjectInputStream oi = new ObjectInputStream(gi);
 			Game game = (Game) (oi.readObject());
