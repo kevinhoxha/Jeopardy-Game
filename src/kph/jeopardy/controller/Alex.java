@@ -1,6 +1,5 @@
 package kph.jeopardy.controller;
 
-import java.io.File;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
@@ -223,7 +222,8 @@ public class Alex extends Application
 			dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 			try
 			{
-				Scanner gameReader = new Scanner(new File("C:\\MyGithub\\Jeopardy-Game\\resources\\game_dates.dat"));
+				ClassLoader cl = Thread.currentThread().getContextClassLoader();
+				Scanner gameReader = new Scanner(cl.getResourceAsStream("game_dates.dat"));
 				while (gameReader.hasNextLine())
 				{
 					String[] str = gameReader.nextLine().split(" ");
