@@ -9,7 +9,7 @@ Download jeopardy.jar and run the file to play the game, or look through the cod
 2. Navigate to the folder where jeopardy.jar is located (usually located in Downloads folder on Macs and PCs).
 3. Double click jeopardy.jar to run the game.
 4. Pick a game date using the calendar feature shown below. The days highlighted in blue are valid options.
-![alt text](https://i.imgur.com/A1dSSMb.png)
+![alt text](https://i.imgur.com/E59X1Pe.png)
 5. Enter the number of players and the names of each player in the subsequent dialog boxes.
 # How to Play
 1. Click on the clue you would like to view
