@@ -239,7 +239,6 @@ public class Alex extends Application
 			GridPane grid = new GridPane();
 			grid.setHgap(10);
 			grid.setVgap(10);
-			grid.setPadding(new Insets(20, 150, 10, 10));
 			DatePicker d = new DatePicker();
 			d.setDayCellFactory(new Callback<DatePicker, DateCell>() {
 				@Override
@@ -258,7 +257,7 @@ public class Alex extends Application
 					};
 				}
 			});
-			grid.add(new Text("Please pick a date in the calendar below corresponding to the air date of the Jeopardy! game you would like to play. The days highlighted in blue have a corresponding game."), 0, 0);
+			grid.add(new Text("Pick the air date of the Jeopardy! game you would like to play. The days highlighted in blue have a corresponding game."), 0, 0);
 			grid.add(d, 0, 1);
 			dialog.getDialogPane().setContent(grid);
 			dialog.setResultConverter(dialogButton -> {
