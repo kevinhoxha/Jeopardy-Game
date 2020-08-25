@@ -13,7 +13,6 @@ import java.util.zip.GZIPInputStream;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -257,7 +256,7 @@ public class Alex extends Application
 					};
 				}
 			});
-			grid.add(new Text("Pick the air date of the Jeopardy! game you would like to play. The days highlighted in blue have a corresponding game."), 0, 0);
+			grid.add(new Text("Pick the original air date of the Jeopardy! game you would like to play. Valid selections are highlighted in blue."), 0, 0);
 			grid.add(d, 0, 1);
 			dialog.getDialogPane().setContent(grid);
 			dialog.setResultConverter(dialogButton -> {
