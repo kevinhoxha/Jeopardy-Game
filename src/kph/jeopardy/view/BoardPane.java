@@ -23,10 +23,10 @@ public class BoardPane extends GridPane
 			{
 				if (row == 0)
 				{
-					Button b = new Button(game.getCategory(round, column).getName());
+					Button b = new Button(game.getCategory(round, column).getShortName(150));
 					b.setStyle(
 							"-fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 2em; -fx-pref-width: "
-									+ columnWidth + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
+									+ columnWidth + "px; -fx-pref-height: " + columnHeight + "px; -fx-alignment: CENTER; -fx-text-alignment: center");
 					b.setWrapText(true);
 					b.setEffect(new DropShadow());
 					b.setId("cat" + column);

@@ -31,6 +31,18 @@ public class Category implements Serializable
 	{
 		return name;
 	}
+	
+	public String getShortName(int maxSize)
+	{
+		if (name.length() <= maxSize)
+		{
+			return name;
+		}
+		else
+		{
+			return name.substring(0, maxSize) + "...";
+		}
+	}
 
 	public Iterator<Question> getQuestions()
 	{

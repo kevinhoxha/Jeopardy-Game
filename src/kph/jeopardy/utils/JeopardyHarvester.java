@@ -23,7 +23,7 @@ import kph.jeopardy.model.Round;
 public class JeopardyHarvester
 {
 	private static List<String> dates = new ArrayList<>();
-	private static int numGames = 6883;
+	private static int numGames = 6906;
 	private static int numDone = 0;
 	
 	public static void main(String[] args)
